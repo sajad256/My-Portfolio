@@ -49,7 +49,7 @@ export default function App() {
 
         {/* Main content above particles */}
         <div style={{ position: "relative", zIndex: 1 }}>
-          {/* <Navbar /> */}
+          <Navbar />
           <Routes>
             <Route
               path="/"
