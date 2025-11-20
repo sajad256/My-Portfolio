@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Custom Animations === */
+
+/* Left → Right */
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slideLeft {
+  animation: slideLeft 0.8s ease forwards;
+}
+
+/* Right → Left */
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slideRight {
+  animation: slideRight 0.8s ease forwards;
+}
+
+/* Bottom → Top */
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slideUp {
+  animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes slideBottomLeft {
+  0% {
+    opacity: 0;
+    transform: translate(-40px, 40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+.animate-slideBottomLeft {
+  animation: slideBottomLeft 0.8s ease forwards;
+}
+
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slideFromRight {
+  animation: slideFromRight 0.8s ease forwards;
+}
+
+/* REUSABLE ANIMATIONS */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease-out;
+}
+
+.show {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Add this to your global CSS or Tailwind file */
+/* slide-up starts hidden below */
+.slide-up {
+  opacity: 0;
+  transform: translateY(120px);
+}
+
+/* instantly shows */
+.slide-up-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body {
+  @apply font-sans;
+}
+
+html {
+  scroll-behavior: auto !important;
+}
