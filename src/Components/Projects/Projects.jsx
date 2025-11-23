@@ -41,7 +41,9 @@ export default function Projects({
               Projects
             </span>
           </h1>
-          <p className="text-gray-400 mt-3 flex justify-center">
+          <p className={` mt-3 flex justify-center ${
+            themeMode === "light" ? "text-black" : "text-gray-400"
+          }`}>
             <span className="w-[300px] md:w-[450px] xl:w-[570px]">
               A collection of projects demonstrating my passion for building
               smooth, stylish, and functional web interfaces.
@@ -106,7 +108,7 @@ export default function Projects({
                       ref={imgRef}
                       src={project.img}
                       alt={project.title}
-                      className="w-full object-cover select-none pointer-events-none"
+                      className="w-full object-cover select-none  cursor-pointer"
                       onLoad={handleImageLoad}
                       animate={{ y: hovered ? -scrollDistance.current : 0 }}
                       transition={{ duration: 6, ease: "easeInOut" }}
@@ -125,6 +127,8 @@ export default function Projects({
                         className={`p-2 rounded-full  transition ${
                           themeMode === "light"
                             ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300"
+                            : themeMode === "dark"
+                            ? "bg-gradient-to-r from-[#0B0B0B] via-[#1A1A2E] to-[#3D2C8D]"
                             : "bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD]"
                         }`}
                       >
@@ -139,9 +143,11 @@ export default function Projects({
                         href={project.github}
                         target="_blank"
                         rel="noreferrer"
-                        className={`p-2 rounded-full bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD] transition ${
+                        className={`p-2 rounded-full  transition ${
                           themeMode === "light"
                             ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300"
+                            : themeMode === "dark"
+                            ? "bg-gradient-to-r from-[#0B0B0B] via-[#1A1A2E] to-[#3D2C8D]"
                             : "bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD]"
                         }`}
                       >

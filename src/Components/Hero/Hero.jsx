@@ -71,7 +71,9 @@ export default function Hero({ themeMode }) {
           </h2>
         </div>
 
-        <p className="animate-slideUp text-gray-400 2xl:text-xl pt-4 font-medium md:w-[500px] xl:w-[500px] text-sm md:text-base leading-relaxed mb-8">
+        <p className={`animate-slideUp 2xl:text-xl pt-4 font-medium md:w-[500px] xl:w-[500px] text-sm md:text-base leading-relaxed mb-8 ${
+          themeMode === "light" ? "text-black" : "text-gray-400"
+        }`}>
           {heroData.paragraph}
         </p>
 
