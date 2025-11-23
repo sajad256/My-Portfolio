@@ -8,15 +8,15 @@ import {
   AllProjectsPage,
 } from "./Components/index";
 import Particles from "./Components/Hero/Particles";
+import Lightning from "./Lightning";
+import Iridescence from "./Iridescence"; // import Iridescence
 import { useState, useEffect } from "react";
 
 export default function App() {
-  // Load themeMode from localStorage on first render
   const [themeMode, setThemeMode] = useState(() => {
     return localStorage.getItem("themeMode") || "gradient";
   });
 
-  // Save themeMode to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("themeMode", themeMode);
   }, [themeMode]);
@@ -34,10 +34,10 @@ export default function App() {
               : themeMode === "dark"
               ? "#000000"
               : "linear-gradient(90deg, #1F1F1F 0%, #2222AA 30%, #3A00AA 65%, #005599 100%)",
-          transition: "background 0.5s ease",
+          transition: "background 1s ease",
         }}
       >
-        {/* Particles covering the whole page */}
+        {/* Effects covering the whole page */}
         <div
           style={{
             position: "fixed",
@@ -49,7 +49,18 @@ export default function App() {
             pointerEvents: "none",
           }}
         >
-          <Particles themeMode={themeMode} />
+          {themeMode === "dark" ? (
+            <Lightning hue={220} xOffset={0} speed={1} intensity={1} size={1} />
+          ) : themeMode === "light" ? (
+            <Iridescence
+              color={[1, 1, 1]}
+              mouseReact={false}
+              amplitude={0.1}
+              speed={1.0}
+            />
+          ) : (
+            <Particles themeMode={themeMode} />
+          )}
         </div>
 
         {/* Main content */}

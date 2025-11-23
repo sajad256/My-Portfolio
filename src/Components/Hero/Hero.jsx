@@ -54,7 +54,7 @@ export default function Hero({ themeMode }) {
         {/* Dynamic color for introText */}
         <h1
           className={`animate-slideLeft text-4xl md:text-6xl 2xl:text-8xl font-bold mb-2 ${
-            themeMode === "light" ? "text-black" : "text-white"
+            themeMode === "light" ? "text-gray-700" : "text-white"
           }`}
         >
           {heroData.introText}{" "}
