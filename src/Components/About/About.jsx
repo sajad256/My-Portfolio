@@ -87,7 +87,9 @@ export default function About({ themeMode }) {
                 <a href="https://www.linkedin.com/feed/" target="_blank">
                   <FaLinkedin
                     className={`px-2 py-2 border rounded-full transform motion-safe:animate-bounce ${
-                      themeMode === "light" ? "text-[#0270AD]" : "text-white"
+                      themeMode === "light"
+                        ? "text-[#0270AD] border-black"
+                        : "text-white"
                     }`}
                     size={40}
                     style={{ animationDuration: "2s" }} // slower bounce
@@ -96,7 +98,9 @@ export default function About({ themeMode }) {
                 <a href="https://github.com/sajad256" target="_blank">
                   <FaGithub
                     className={`px-2 py-2 border rounded-full transform motion-safe:animate-bounce ${
-                      themeMode === "light" ? "text-black" : "text-white"
+                      themeMode === "light"
+                        ? "text-black border-black"
+                        : "text-white"
                     }`}
                     size={40}
                     style={{ animationDuration: "2s", animationDelay: "0.2s" }} // delay second
@@ -105,7 +109,9 @@ export default function About({ themeMode }) {
                 <a href="" target="_blank">
                   <SiGmail
                     className={`px-2 py-2 border rounded-full transform motion-safe:animate-bounce ${
-                      themeMode === "light" ? "text-[#DF493E]" : "text-white"
+                      themeMode === "light"
+                        ? "text-[#DF493E] border-black"
+                        : "text-white"
                     }`}
                     size={40}
                     style={{ animationDuration: "2s", animationDelay: "0.4s" }} // delay third
