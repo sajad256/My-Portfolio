@@ -22,8 +22,9 @@ import {
   SiCanva,
   SiAdobephotoshop,
 } from "react-icons/si";
+import { th } from "framer-motion/client";
 
-export default function Skill() {
+export default function Skill({ themeMode }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -78,7 +79,11 @@ export default function Skill() {
         </h1>
 
         {/* USING NOW */}
-        <h2 className="text-white font-bold px-4 md:mx-12 pt-16 tracking-widest fade-left">
+        <h2
+          className={` font-bold px-4 md:mx-12 pt-16 tracking-widest fade-left ${
+            themeMode === "light" ? "text-black" : "text-white"
+          }`}
+        >
           USING NOW :
         </h2>
 
@@ -99,7 +104,11 @@ export default function Skill() {
         </div>
 
         {/* LEARNING */}
-        <h2 className="text-white font-bold px-4 md:mx-12 tracking-widest fade-left">
+        <h2
+          className={` font-bold px-4 md:mx-12 tracking-widest fade-left ${
+            themeMode === "light" ? "text-black" : "text-white"
+          }`}
+        >
           LEARNING :
         </h2>
 
@@ -120,7 +129,11 @@ export default function Skill() {
         </div>
 
         {/* OTHER SKILLS */}
-        <h2 className="text-white font-bold px-4 md:mx-12 tracking-widest fade-left">
+        <h2
+          className={` font-bold px-4 md:mx-12 tracking-widest fade-left ${
+            themeMode === "light" ? "text-black" : "text-white"
+          }`}
+        >
           OTHER SKILLS :
         </h2>
 

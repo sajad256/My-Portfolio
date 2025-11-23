@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Particles from "./Particles";
 import { heroData } from "../Constants/Constants";
 import FPSCounter from "../FPSCounter"; // optional FPS display
+import { Link } from "react-router-dom";
 
-export default function Hero() {
+export default function Hero({ themeMode }) {
+  // <- receive themeMode
   const roles = [
     "Front-End Developer",
     "Back-End Developer",
@@ -41,31 +43,7 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative w-full h-screen overflow-hidden">
-      {/* Optional FPS Meter */}
       <FPSCounter />
-
-      {/* Particles Background */}
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: 0,
-        }}
-      >
-        <Particles
-          particleColors={["#ffffff", "#ffffff"]}
-          particleCount={200}
-          particleSpread={10}
-          speed={0.1}
-          particleBaseSize={100}
-          moveParticlesOnHover={true}
-          alphaParticles={false}
-          disableRotation={false}
-        />
-      </div>
 
       {/* Hero Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 select-none md:pt-0 z-10">
@@ -73,7 +51,12 @@ export default function Hero() {
           {heroData.welcomeText}
         </h2>
 
-        <h1 className="animate-slideLeft text-4xl md:text-6xl 2xl:text-8xl font-bold text-white mb-2">
+        {/* Dynamic color for introText */}
+        <h1
+          className={`animate-slideLeft text-4xl md:text-6xl 2xl:text-8xl font-bold mb-2 ${
+            themeMode === "light" ? "text-black" : "text-white"
+          }`}
+        >
           {heroData.introText}{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-blue-400 to-purple-500">
             {heroData.name.map((part, idx) => (
@@ -93,14 +76,28 @@ export default function Hero() {
         </p>
 
         <div className="animate-slideUp flex flex-col sm:flex-row gap-4">
-          {heroData.buttons.map((btn, idx) => (
-            <button
-              key={idx}
-              className="px-6 py-2 rounded-full text-white font-semibold transition duration-300 bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90"
-            >
-              {btn.text}
-            </button>
-          ))}
+          {heroData.buttons.map((btn, idx) => {
+            if (btn.text === "View My Projects") {
+              // Use React Router Link for this button
+              return (
+                <Link to="/projects/all" key={idx}>
+                  <button className="px-6 py-2 rounded-full text-white font-semibold transition duration-300 bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90">
+                    {btn.text}
+                  </button>
+                </Link>
+              );
+            } else {
+              // Keep other buttons unchanged
+              return (
+                <button
+                  key={idx}
+                  className="px-6 py-2 rounded-full text-white font-semibold transition duration-300 bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90"
+                >
+                  {btn.text}
+                </button>
+              );
+            }
+          })}
         </div>
       </div>
     </section>

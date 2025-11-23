@@ -7,9 +7,20 @@ import {
   Project,
   AllProjectsPage,
 } from "./Components/index";
-import Particles from "./Components/Hero/Particles"; // make sure path is correct
+import Particles from "./Components/Hero/Particles";
+import { useState, useEffect } from "react";
 
 export default function App() {
+  // Load themeMode from localStorage on first render
+  const [themeMode, setThemeMode] = useState(() => {
+    return localStorage.getItem("themeMode") || "gradient";
+  });
+
+  // Save themeMode to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("themeMode", themeMode);
+  }, [themeMode]);
+
   return (
     <BrowserRouter>
       <div
@@ -18,10 +29,15 @@ export default function App() {
           minHeight: "100vh",
           scrollMarginTop: "96px",
           background:
-            "linear-gradient(90deg, #1F1F1F 0%, #2222AA 30%, #3A00AA 65%, #005599 100%)",
+            themeMode === "light"
+              ? "#ffffff"
+              : themeMode === "dark"
+              ? "#000000"
+              : "linear-gradient(90deg, #1F1F1F 0%, #2222AA 30%, #3A00AA 65%, #005599 100%)",
+          transition: "background 0.5s ease",
         }}
       >
-        {/* Particles background */}
+        {/* Particles covering the whole page */}
         <div
           style={{
             position: "fixed",
@@ -30,39 +46,32 @@ export default function App() {
             width: "100vw",
             height: "100vh",
             zIndex: 0,
-            pointerEvents: "none", // so it doesn't block clicks
+            pointerEvents: "none",
           }}
         >
-          <Particles
-            particleColors={["#ffffff", "#ffffff"]}
-            particleCount={200}
-            particleSpread={10}
-            speed={0.1}
-            particleBaseSize={100}
-            moveParticlesOnHover={false} // keep particles in place
-            alphaParticles={false}
-            disableRotation={false}
-            hoverEffect="twinkle" // subtle hover effect
-            hoverIntensity={0.3} // how strong the twinkle is
-          />
+          <Particles themeMode={themeMode} />
         </div>
 
-        {/* Main content above particles */}
+        {/* Main content */}
         <div style={{ position: "relative", zIndex: 1 }}>
-          <Navbar />
+          <Navbar themeMode={themeMode} setThemeMode={setThemeMode} />
+
           <Routes>
             <Route
               path="/"
               element={
                 <>
-                  <Hero />
-                  <About />
-                  <Skill />
-                  <Project limit={3} showButton={true} />
+                  <Hero themeMode={themeMode} />
+                  <About themeMode={themeMode} />
+                  <Skill themeMode={themeMode} />
+                  <Project limit={3} showButton={true} themeMode={themeMode} />
                 </>
               }
             />
-            <Route path="/projects/all" element={<AllProjectsPage />} />
+            <Route
+              path="/projects/all"
+              element={<AllProjectsPage themeMode={themeMode} />}
+            />
           </Routes>
         </div>
       </div>

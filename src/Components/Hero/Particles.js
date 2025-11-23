@@ -1,16 +1,13 @@
 import { useEffect, useRef } from "react";
 import { Renderer, Camera, Geometry, Program, Mesh } from "ogl";
 
-const defaultColors = ["#ffffff", "#ffffff", "#ffffff"];
-
 const hexToRgb = (hex) => {
   hex = hex.replace(/^#/, "");
-  if (hex.length === 3) {
+  if (hex.length === 3)
     hex = hex
       .split("")
       .map((c) => c + c)
       .join("");
-  }
   const int = parseInt(hex, 16);
   const r = ((int >> 16) & 255) / 255;
   const g = ((int >> 8) & 255) / 255;
@@ -72,9 +69,7 @@ const fragment = /* glsl */ `
     float d = length(uv - vec2(0.5));
     
     if(uAlphaParticles < 0.5) {
-      if(d > 0.5) {
-        discard;
-      }
+      if(d > 0.5) discard;
       gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), 1.0);
     } else {
       float circle = smoothstep(0.5, 0.4, d) * 0.8;
@@ -87,7 +82,7 @@ const Particles = ({
   particleCount = 200,
   particleSpread = 10,
   speed = 0.1,
-  particleColors,
+  themeMode = "gradient",
   moveParticlesOnHover = false,
   particleHoverFactor = 1,
   alphaParticles = false,
@@ -118,7 +113,7 @@ const Particles = ({
       renderer.setSize(width, height);
       camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
     };
-    window.addEventListener("resize", resize, false);
+    window.addEventListener("resize", resize);
     resize();
 
     const handleMouseMove = (e) => {
@@ -127,21 +122,20 @@ const Particles = ({
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
       mouseRef.current = { x, y };
     };
-
-    if (moveParticlesOnHover) {
+    if (moveParticlesOnHover)
       container.addEventListener("mousemove", handleMouseMove);
-    }
 
-    const count = particleCount;
-    const positions = new Float32Array(count * 3);
-    const randoms = new Float32Array(count * 4);
-    const colors = new Float32Array(count * 3);
+    // Particle colors based on theme
     const palette =
-      particleColors && particleColors.length > 0
-        ? particleColors
-        : defaultColors;
+      themeMode === "light"
+        ? ["#000000", "#000000"] // black dots for white BG
+        : ["#ffffff", "#ffffff"]; // white dots for dark & gradient BG
 
-    for (let i = 0; i < count; i++) {
+    const positions = new Float32Array(particleCount * 3);
+    const randoms = new Float32Array(particleCount * 4);
+    const colors = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount; i++) {
       let x, y, z, len;
       do {
         x = Math.random() * 2 - 1;
@@ -214,15 +208,11 @@ const Particles = ({
 
     return () => {
       window.removeEventListener("resize", resize);
-      if (moveParticlesOnHover) {
+      if (moveParticlesOnHover)
         container.removeEventListener("mousemove", handleMouseMove);
-      }
       cancelAnimationFrame(animationFrameId);
-      if (container.contains(gl.canvas)) {
-        container.removeChild(gl.canvas);
-      }
+      if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     particleCount,
     particleSpread,
@@ -234,6 +224,7 @@ const Particles = ({
     sizeRandomness,
     cameraDistance,
     disableRotation,
+    themeMode, // <-- re-run when theme changes
   ]);
 
   return (

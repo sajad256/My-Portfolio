@@ -6,6 +6,7 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 export default function Projects({
+  themeMode,
   limit,
   showButton = false,
   backToHome = false,
@@ -30,7 +31,11 @@ export default function Projects({
 
         {/* Section Title */}
         <div className="info text-center">
-          <h1 className="text-white font-bold text-2xl md:text-3xl lg:text-4xl">
+          <h1
+            className={` font-bold text-2xl md:text-3xl lg:text-4xl ${
+              themeMode === "light" ? "text-black" : "text-white"
+            }`}
+          >
             Feature{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-blue-400 to-purple-500">
               Projects
@@ -83,7 +88,13 @@ export default function Projects({
               return (
                 <div
                   key={idx}
-                  className="card border-0 rounded-xl bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD] p-3 flex flex-col"
+                  className={`card border-0 rounded-xl bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD] p-3 flex flex-col ${
+                    themeMode === "light"
+                      ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300"
+                      : themeMode === "dark"
+                      ? "bg-gradient-to-r from-[#0B0B0B] via-[#1A1A2E] to-[#3D2C8D]"
+                      : ""
+                  }`}
                 >
                   <div
                     ref={containerRef}
@@ -102,31 +113,61 @@ export default function Projects({
                       style={{ willChange: "transform" }}
                     />
 
-                    <div className="absolute bottom-3 left-0 right-0 flex justify-between mx-3 gap-4 z-20">
+                    <div
+                      className={`absolute bottom-3 left-0 right-0 flex justify-between mx-3 gap-4 z-20 transition-opacity duration-300 ${
+                        hovered ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
                       <a
                         href={project.live}
                         target="_blank"
                         rel="noreferrer"
-                        className="p-2 rounded-full bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD] transition"
+                        className={`p-2 rounded-full  transition ${
+                          themeMode === "light"
+                            ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300"
+                            : "bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD]"
+                        }`}
                       >
-                        <FaEye className="text-white" size={18} />
+                        <FaEye
+                          className={`${
+                            themeMode === "light" ? "text-black" : "text-white"
+                          }`}
+                          size={18}
+                        />
                       </a>
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noreferrer"
-                        className="p-2 rounded-full bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD] transition"
+                        className={`p-2 rounded-full bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD] transition ${
+                          themeMode === "light"
+                            ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300"
+                            : "bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD]"
+                        }`}
                       >
-                        <FaGithub className="text-white" size={18} />
+                        <FaGithub
+                          className={`${
+                            themeMode === "light" ? "text-black" : "text-white"
+                          }`}
+                          size={18}
+                        />
                       </a>
                     </div>
                   </div>
 
                   <div className="flex justify-between items-center mt-4 px-1">
-                    <h2 className="text-white font-semibold">
+                    <h2
+                      className={`${
+                        themeMode === "light" ? "text-black" : "text-white"
+                      } font-semibold`}
+                    >
                       {project.title}
                     </h2>
-                    <p className="text-gray-400 text-sm">
+                    <p
+                      className={`${
+                        themeMode === "light" ? "text-black" : "text-gray-400"
+                      } text-sm`}
+                    >
                       {project.projectName}
                     </p>
                   </div>
