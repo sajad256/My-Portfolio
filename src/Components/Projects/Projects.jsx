@@ -88,12 +88,12 @@ export default function Projects({
               return (
                 <div
                   key={idx}
-                  className={`card border-0 rounded-xl bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD] p-3 flex flex-col ${
+                  className={`card border-0 rounded-xl  p-3 flex flex-col ${
                     themeMode === "light"
                       ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300"
                       : themeMode === "dark"
                       ? "bg-gradient-to-r from-[#0B0B0B] via-[#1A1A2E] to-[#3D2C8D]"
-                      : ""
+                      : "bg-gradient-to-r from-[#0D0D2B] via-[#2A2AFF] to-[#6B2ACD]"
                   }`}
                 >
                   <div
