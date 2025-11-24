@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import { navLinks } from "../Constants/Constants";
 import { IoMenu } from "react-icons/io5";
 import { FaMoon, FaSun, FaPalette } from "react-icons/fa"; // fix: FaPalette instead of TbGradient
@@ -83,12 +85,22 @@ export default function NavbarBottom({ themeMode, setThemeMode }) {
     return <FaPalette className="text-cyan-400" size={22} />;
   };
 
+  const navigate = useNavigate();
+
+  const goHome = () => {
+    navigate("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[9999] rounded-full px-4 sm:px-6 w-full max-w-[95%] sm:max-w-[700px] lg:max-w-[850px] xl:max-w-[900px]">
       <div className="flex items-center justify-between py-2 container relative rounded-full md:w-[670px] xl:w-[900px] px-4 bg-black/50 backdrop-blur-md">
         {/* LOGO */}
         <div className="logo">
-          <h1 className="text-xl font-bold italic bg-gradient-to-r from-purple-700 via-indigo-500 to-cyan-400 bg-clip-text text-transparent">
+          <h1
+            onClick={goHome}
+            className="text-xl font-bold italic bg-gradient-to-r from-purple-700 via-indigo-500 to-cyan-400 bg-clip-text text-transparent cursor-pointer"
+          >
             {logoText}
             <span className="animate-pulse">|</span>
           </h1>
