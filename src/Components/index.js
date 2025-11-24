@@ -4,4 +4,5 @@ import About from "./About/About";
 import Skill from "./Skills/Skill";
 import Project from "./Projects/Projects";
 import AllProjectsPage from "./Projects/AllProjects";
-export { Navbar, Hero, About, Skill, Project, AllProjectsPage};
+import Icon from "./Icons";
+export { Navbar, Hero, About, Skill, Project, AllProjectsPage, Icon };
